@@ -9,6 +9,11 @@ import {
   Name,
   Text,
   SurroundingContainer,
+  Info,
+  InfoContainer,
+  Title,
+  Ability,
+  DetailsBox,
 } from "./styles";
 
 function PokemonDetails() {
@@ -36,26 +41,39 @@ function PokemonDetails() {
           <ID>#{pokemonData?.id}</ID>
           <Name>{pokemonData?.forms[0].name}</Name>
         </Container>
-        <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod fuga
-          nemo iusto eum distinctio et consequuntur quidem dignissimos, possimus
-          esse iste alias nobis! Inventore maxime est eius eaque deserunt
-          magnam. Unde corrupti beatae eligendi reprehenderit, saepe tenetur est
-          qui ipsum aut sed tempora accusantium natus explicabo doloremque,
-          corporis consequuntur laborum earum iusto. Nobis nemo totam expedita
-          eos labore consequuntur sint. Beatae asperiores molestiae velit odit
-          aperiam provident tenetur expedita ea vitae inventore laboriosam
-          temporibus nesciunt eveniet et ut distinctio, cum cupiditate saepe
-          esse reprehenderit ipsa aliquam, suscipit perferendis eligendi?
-          Praesentium. Deleniti quo quia incidunt placeat expedita ipsa nihil
-          modi assumenda architecto odio vitae sint consequuntur dolor
-          distinctio velit laboriosam, dignissimos, repellat dolorem asperiores
-          ipsam similique et aperiam hic neque. Sunt. Officiis vitae officia
-          laborum, rem aspernatur dignissimos totam laudantium optio? Sed omnis
-          voluptates quo, asperiores architecto dolore? Totam obcaecati
-          exercitationem dolores ea, illo incidunt ipsam eligendi tenetur
-          quibusdam voluptate necessitatibus!
-        </Text>
+        <DetailsBox>
+          <Info>
+            <InfoContainer>
+              <Title>ABILITY:</Title>
+              <Ability>{pokemonData?.abilities[0].ability.name}</Ability>
+            </InfoContainer>
+            <InfoContainer>
+              <Title>EXPERIENCE:</Title>
+              <Ability>{pokemonData?.base_experience}</Ability>
+            </InfoContainer>
+            <InfoContainer>
+              <Title>WEIGHT:</Title>
+              <Ability>{pokemonData?.weight}</Ability>
+            </InfoContainer>
+            <InfoContainer>
+              <Title>HEIGHT:</Title>
+              <Ability>{pokemonData?.height}</Ability>
+            </InfoContainer>
+          </Info>
+          <Text>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Quod fuga nemo iusto eum distinctio et
+            consequuntur quidem dignissimos, possimus esse iste alias nobis!
+            Inventore maxime est eius eaque deserunt magnam. Unde corrupti
+            beatae eligendi reprehenderit, saepe tenetur est qui ipsum aut sed
+            tempora accusantium natus explicabo doloremque, corporis
+            consequuntur laborum earum iusto. Nobis nemo totam expedita eos
+            labore consequuntur sint. Beatae asperiores molestiae velit odit
+            aperiam provident tenetur expedita ea vitae inventore laboriosam
+            temporibus nesciunt eveniet et ut distinctio, cum cupiditate saepe
+            esse reprehenderit ipsa aliquam, suscipit perferendis eligendi?
+          </Text>
+        </DetailsBox>
       </SurroundingContainer>
     </>
   );
