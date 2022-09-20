@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Pokemon from "../../components/pokemon/Pokemon";
 import { IFetchedPokemon } from "../../types";
 import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
@@ -23,7 +22,7 @@ function PokemonDetails() {
         .then((json) => setPokemonData(json));
     };
     fetchPokemon();
-  }, []);
+  });
 
   return (
     <>

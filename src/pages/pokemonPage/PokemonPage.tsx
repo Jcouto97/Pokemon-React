@@ -7,14 +7,10 @@ import { useSearchStore } from "./../../stores/search";
 import frontArrow from "./../../assets/front.png";
 import backArrow from "./../../assets/back.png";
 import { Link } from "react-router-dom";
-import { fetchPokemons, fetchPokemonData } from './../../services/pokemon-service'
-
-/*
-name no /pokemon .results
-id e imagem no url que esta no /{name} ou {id}
-fazer fetch para nome e depois para os outros 2
-
-*/
+import {
+  fetchPokemons,
+  fetchPokemonData,
+} from "./../../services/pokemon-service";
 
 const URL = "https://pokeapi.co/api/v2/pokemon";
 
@@ -22,23 +18,23 @@ function PokemonPage() {
   const [pokemonInfo, setPokemonInfo] = useState<IPokemonData[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
 
-  //aqui o state hook
+  //aqui o state hook do zustand
   const searchInput = useSearchStore((state) => state.search);
 
   useEffect(() => {
-    if (searchInput) {
-      fetchSinglePokemon();
-    } else {
-      fetchAllPokemon();
-    }
+    if (searchInput) fetchSinglePokemon();
+    else fetchAllPokemon();
 
-    console.log(searchInput);
+    //????
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput, currentPage]);
 
   const fetchAllPokemon = async () => {
-
     //funçao do service
-    const pokemonResults: IFetchedResults[] | undefined = await fetchPokemons(URL, currentPage);
+    const pokemonResults: IFetchedResults[] | undefined = await fetchPokemons(
+      URL,
+      currentPage
+    );
 
     //Promise all porque vamos iterar sobre 1 array de promises e quero que todas se resolvam antes de retornar
     const pokemonInfo = await Promise.all(
@@ -64,7 +60,6 @@ function PokemonPage() {
       `https://pokeapi.co/api/v2/pokemon/${searchInput}`
     );
     const data = (await response.json()) as IFetchedPokemon;
-    console.log(data);
     setPokemonInfo([
       {
         image: data?.sprites?.front_default,

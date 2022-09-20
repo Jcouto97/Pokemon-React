@@ -1,15 +1,12 @@
 import styled from "styled-components";
-import Theme from './../../theme'
 
 export const Container = styled.div`
-  /* background-color: #fddb2a; */
+  /* border-bottom: {({colors}) => colors.secondaryColor}; ???? */
   background-color: ${props => props.theme.colors.primaryColor};
   display: flex;
   justify-content: space-around;
   gap: 800px;
   align-items: center;
-  /* border-bottom: 1px solid black; */
-  /* border-bottom: {({colors}) => colors.secondaryColor}; ???? */
   border-bottom: 2px solid red;
 `;
 
