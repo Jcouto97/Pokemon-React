@@ -15,7 +15,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
+  width: 60%;
 `;
 
 export const Image = styled.img`
@@ -38,8 +38,37 @@ export const Name = styled.h3`
 
 export const Text = styled.p`
   font-size: 18px;
+`;
+
+export const Info = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const InfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  background-color: aliceblue;
+  border-radius: 20px;
+  border: 1px solid red;
+`;
+
+export const Title = styled.h5`
+  text-decoration: underline;
+  margin: 10px;
+`;
+
+export const Ability = styled.p`
+  font-size: 16px;
+`;
+
+export const DetailsBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   background-color: #f3eed1;
-  padding: 40px;
+  padding: 20px;
   margin: 20px 30px 0 0;
   border: 1px solid grey;
 `;

@@ -47,12 +47,38 @@ function PokemonPage() {
             image: data?.sprites?.front_default,
             id: data?.id,
             name: data?.forms[0].name,
+            ability: data?.abilities[0].ability.name,
+            experience: data?.base_experience,
+            height: data?.height,
+            weight: data?.weight,
           } as IPokemonData;
         }
       )
     );
     setPokemonInfo(pokemonInfo);
   };
+
+  /*  export interface IFetchedPokemon {
+    id: number;
+    sprites: {
+      front_default: string;
+    };
+    forms: [
+      {
+        name: string;
+      }
+    ];
+    abilities: [
+      {
+        ability: {
+          name: string;
+        };
+      }
+    ];
+    base_experience: string;
+    weight: number;
+    height: number;
+  } */
 
   //vou buscar 1 unico pokemon através do searchInput e guardo na info para renderizar
   const fetchSinglePokemon = async () => {
@@ -65,6 +91,10 @@ function PokemonPage() {
         image: data?.sprites?.front_default,
         id: data.id,
         name: data.forms[0].name,
+        ability: data?.abilities[0].ability.name,
+        experience: data?.base_experience,
+        height: data?.height,
+        weight: data?.weight,
       } as IPokemonData,
     ]);
   };
