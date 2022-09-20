@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 name no /pokemon .results
 id e imagem no url que esta no /{name} ou {id}
 fazer fetch para nome e depois para os outros 2
+
 */
 
 function PokemonPage() {
