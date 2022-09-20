@@ -7,6 +7,7 @@ import { useSearchStore } from "./../../stores/search";
 import frontArrow from "./../../assets/front.png";
 import backArrow from "./../../assets/back.png";
 import { Link } from "react-router-dom";
+import { fetchPokemons, fetchPokemonData } from './../../services/pokemon-service'
 
 /*
 name no /pokemon .results
@@ -14,6 +15,8 @@ id e imagem no url que esta no /{name} ou {id}
 fazer fetch para nome e depois para os outros 2
 
 */
+
+const URL = "https://pokeapi.co/api/v2/pokemon";
 
 function PokemonPage() {
   const [pokemonInfo, setPokemonInfo] = useState<IPokemonData[]>([]);
@@ -33,27 +36,21 @@ function PokemonPage() {
   }, [searchInput, currentPage]);
 
   const fetchAllPokemon = async () => {
-    //OFFSET nr de pokes a dar skip por pagina usando o limit
-    const skip = currentPage * 20;
 
-    const responseResults = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?offset=${skip}&limit=20`
-    );
-    const json = await responseResults.json();
-    const pokemonResults: IFetchedResults[] = json.results;
+    //funçao do service
+    const pokemonResults: IFetchedResults[] | undefined = await fetchPokemons(URL, currentPage);
 
     //Promise all porque vamos iterar sobre 1 array de promises e quero que todas se resolvam antes de retornar
     const pokemonInfo = await Promise.all(
       (pokemonResults as IFetchedResults[]).map(
         async (pokemon: IFetchedResults) => {
           //para aceder a prop url dentro dos results:
-          const response = await fetch(pokemon.url);
-          const data: IFetchedPokemon = await response.json();
+          const data = await fetchPokemonData(pokemon.url, null);
 
           return {
             image: data?.sprites?.front_default,
-            id: data.id,
-            name: data.forms[0].name,
+            id: data?.id,
+            name: data?.forms[0].name,
           } as IPokemonData;
         }
       )
