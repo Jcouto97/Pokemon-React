@@ -19,6 +19,7 @@ const theme = {
 };
 
 //component
+//FC para nao precisar sempre de descontruir props
 const Theme: FC<IThemeProps> = ({ children }) => (
   <ThemeProvider theme={theme}>{children}</ThemeProvider>
 );

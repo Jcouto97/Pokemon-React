@@ -9,30 +9,19 @@ import backArrow from "./../../assets/back.png";
 import { Link } from "react-router-dom";
 import { fetchPokemons, fetchPokemonData } from './../../services/pokemon-service'
 
-/*
-name no /pokemon .results
-id e imagem no url que esta no /{name} ou {id}
-fazer fetch para nome e depois para os outros 2
-
-*/
-
 const URL = "https://pokeapi.co/api/v2/pokemon";
 
 function PokemonPage() {
   const [pokemonInfo, setPokemonInfo] = useState<IPokemonData[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
 
-  //aqui o state hook
+  //aqui o state hook do zustand
   const searchInput = useSearchStore((state) => state.search);
 
   useEffect(() => {
-    if (searchInput) {
-      fetchSinglePokemon();
-    } else {
-      fetchAllPokemon();
-    }
-
-    console.log(searchInput);
+    if (searchInput) fetchSinglePokemon();
+    else fetchAllPokemon();
+    
   }, [searchInput, currentPage]);
 
   const fetchAllPokemon = async () => {
@@ -64,7 +53,6 @@ function PokemonPage() {
       `https://pokeapi.co/api/v2/pokemon/${searchInput}`
     );
     const data = (await response.json()) as IFetchedPokemon;
-    console.log(data);
     setPokemonInfo([
       {
         image: data?.sprites?.front_default,

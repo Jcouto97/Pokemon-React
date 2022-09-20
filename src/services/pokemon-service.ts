@@ -16,7 +16,7 @@ export const fetchPokemons = async (url: string, page: number) => {
 };
 
 export const fetchPokemonData = async (url: string, search: string | null) => {
-  //se term existe procura pokemon senao url antigo
+  //se search existe procura pokemon senao url normal
   const searchType = search
     ? `https://pokeapi.co/api/v2/pokemon/${search}`
     : url;
