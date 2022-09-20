@@ -6,11 +6,13 @@ import { IFetchedResults, IFetchedPokemon, IPokemonData } from "./../../types";
 import { useSearchStore } from "./../../stores/search";
 import frontArrow from "./../../assets/front.png";
 import backArrow from "./../../assets/back.png";
+import { Link } from "react-router-dom";
 
 /*
 name no /pokemon .results
 id e imagem no url que esta no /{name} ou {id}
 fazer fetch para nome e depois para os outros 2
+
 */
 
 function PokemonPage() {
@@ -92,8 +94,12 @@ function PokemonPage() {
       <Header />
       <Container>
         <Grid>
-          {pokemonInfo.map((pokemon, i) => {
-            return <Pokemon key={i} pokemon={pokemon} />;
+          {pokemonInfo.map((pokemon, index) => {
+            return (
+              <Link key={index} to={`/pokemon/${pokemon.id}`}>
+                <Pokemon pokemon={pokemon} />
+              </Link>
+            );
           })}
         </Grid>
         {pageButtons()}
