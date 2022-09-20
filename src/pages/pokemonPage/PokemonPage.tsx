@@ -7,7 +7,10 @@ import { useSearchStore } from "./../../stores/search";
 import frontArrow from "./../../assets/front.png";
 import backArrow from "./../../assets/back.png";
 import { Link } from "react-router-dom";
-import { fetchPokemons, fetchPokemonData } from './../../services/pokemon-service'
+import {
+  fetchPokemons,
+  fetchPokemonData,
+} from "./../../services/pokemon-service";
 
 const URL = "https://pokeapi.co/api/v2/pokemon";
 
@@ -21,13 +24,17 @@ function PokemonPage() {
   useEffect(() => {
     if (searchInput) fetchSinglePokemon();
     else fetchAllPokemon();
-    
+
+    //????
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput, currentPage]);
 
   const fetchAllPokemon = async () => {
-
     //funçao do service
-    const pokemonResults: IFetchedResults[] | undefined = await fetchPokemons(URL, currentPage);
+    const pokemonResults: IFetchedResults[] | undefined = await fetchPokemons(
+      URL,
+      currentPage
+    );
 
     //Promise all porque vamos iterar sobre 1 array de promises e quero que todas se resolvam antes de retornar
     const pokemonInfo = await Promise.all(

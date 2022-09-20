@@ -1,5 +1,4 @@
-import React, { FC } from "react";
-import { Container, Title, SearchBox, Dex } from "./styles";
+import { Container, Title, Dex } from "./styles";
 import Search from "../search/Search";
 import { Link } from "react-router-dom";
 

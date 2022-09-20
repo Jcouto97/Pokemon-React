@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import { Container, Input, Glass, Button } from "./styles";
 import glass from "./../../assets/search.png";
 import { useSearchStore } from "../../stores/search";
