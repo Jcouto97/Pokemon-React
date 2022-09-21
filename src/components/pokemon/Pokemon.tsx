@@ -1,14 +1,14 @@
 import React from "react";
 import { Container, Image, ID, Name } from "./styles";
-import { IFetchedPokemon, IPokemonData } from "./../../types";
+import { IPokemonData } from "./../../types";
 
-function Pokemon({ pokemon } : { pokemon: IFetchedPokemon | undefined }) {
+function Pokemon({ pokemon } : { pokemon: IPokemonData }) {
 
   return (
     <Container>
-      <Image src={pokemon?.sprites.front_default} alt="pokemon image" />
-      <ID>#{pokemon?.id}</ID>
-      <Name>{pokemon?.forms[0].name}</Name>
+      <Image src={pokemon.image} alt="pokemon image" />
+      <ID>#{pokemon.id}</ID>
+      <Name>{pokemon.name}</Name>
     </Container>
   );
 }
