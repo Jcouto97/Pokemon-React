@@ -4,6 +4,12 @@ export const SurroundingContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 965px) {
+    flex-wrap: wrap;
+    gap: 1%;
+    padding: 10px;
+  }
 `;
 
 export const Container = styled.div`
@@ -22,6 +28,10 @@ export const Image = styled.img`
   min-width: 120px;
   background-color: aliceblue;
   border: 1px solid black;
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
 `;
 
 export const ID = styled.p`
@@ -43,6 +53,11 @@ export const Text = styled.p`
 export const Info = styled.div`
   display: flex;
   justify-content: space-around;
+  @media (max-width: 850px) {
+    height: 20%;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
 `;
 
 export const InfoContainer = styled.div`
@@ -71,4 +86,13 @@ export const DetailsBox = styled.div`
   padding: 20px;
   margin: 20px 30px 0 0;
   border: 1px solid grey;
+
+  @media (max-width: 965px) {
+    width: 80%;
+  }
+
+  @media (max-width: 850px) {
+    width: 100%;
+    margin-left: 30px;
+  }
 `;

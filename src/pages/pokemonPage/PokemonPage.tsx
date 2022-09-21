@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/header/Header";
 import Pokemon from "../../components/pokemon/Pokemon";
-import { Container, Grid, ContainerButton, Button, IconImage } from "./styles";
+import { Container, Grid, ContainerButton, Button, PageButtons } from "./styles";
 import { IFetchedResults, IFetchedPokemon, IPokemonData } from "./../../types";
 import { useSearchStore } from "./../../stores/search";
 import frontArrow from "./../../assets/front.png";
@@ -58,27 +58,6 @@ function PokemonPage() {
     setPokemonInfo(pokemonInfo);
   };
 
-  /*  export interface IFetchedPokemon {
-    id: number;
-    sprites: {
-      front_default: string;
-    };
-    forms: [
-      {
-        name: string;
-      }
-    ];
-    abilities: [
-      {
-        ability: {
-          name: string;
-        };
-      }
-    ];
-    base_experience: string;
-    weight: number;
-    height: number;
-  } */
 
   //vou buscar 1 unico pokemon através do searchInput e guardo na info para renderizar
   const fetchSinglePokemon = async () => {
@@ -103,10 +82,10 @@ function PokemonPage() {
     <ContainerButton>
       <Button onClick={() => setCurrentPage((prev) => prev + 1)}>
         {/*automaticamente vai buscar o ultimo state*/}
-        <IconImage src={backArrow} alt="Previous" />
+        <PageButtons src={backArrow} alt="Previous" />
       </Button>
       <Button onClick={() => setCurrentPage((prev) => prev - 1)}>
-        <IconImage src={frontArrow} alt="Next" />
+        <PageButtons src={frontArrow} alt="Next" />
       </Button>
     </ContainerButton>
   );

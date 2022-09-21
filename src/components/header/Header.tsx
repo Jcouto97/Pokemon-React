@@ -6,10 +6,12 @@ const Header = () => {
   return (
     <Link to="/">
       <Container>
-        <Title>
-          Poke<Dex>Dex</Dex>
-        </Title>
-        <Search />
+        
+          <Title>
+            Poke<Dex>Dex</Dex>
+          </Title>
+          <Search />
+       
       </Container>
     </Link>
   );

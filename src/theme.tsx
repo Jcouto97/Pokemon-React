@@ -14,7 +14,8 @@ const theme = {
     bordersColor: "#cfc3c3",
   },
   grid: {
-    gridDisplay: "1fr 1fr 1fr 1fr",
+    // gridDisplay: "1fr 1fr 1fr 1fr",
+    gridDisplay: "repeat(auto-fit, minmax(300px, 4fr))",
   },
 };
 
