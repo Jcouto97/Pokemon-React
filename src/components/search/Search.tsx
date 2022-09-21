@@ -19,7 +19,7 @@ const Search = () => {
   //se nao usasse callback ia ser obrigado a dar componente a todo o componente
   const addSearchHandler = useCallback((search: string) => {
     //descontrui objeto do useSearchStore aqui
-    useSearchStore.setState({ search: search });
+    useSearchStore.setState({ search });
   }, []);
 
   return (

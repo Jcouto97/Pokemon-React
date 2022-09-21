@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  /* border-bottom: {({colors}) => colors.secondaryColor}; ???? */
+  /* border-bottom: {({colors}) => colors.theme.secondaryColor}; ???? */
   background-color: ${props => props.theme.colors.primaryColor};
   display: flex;
   justify-content: space-around;
