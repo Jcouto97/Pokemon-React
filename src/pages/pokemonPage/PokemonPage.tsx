@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Header from "../../components/header/Header";
 import Pokemon from "../../components/pokemon/Pokemon";
-import { Container, Grid, ContainerButton, Button, PageButtons } from "./styles";
+import {
+  Container,
+  Grid,
+  ContainerButton,
+  Button,
+  PageButtons,
+} from "./styles";
 import { IFetchedResults, IFetchedPokemon, IPokemonData } from "./../../types";
 import { useSearchStore } from "./../../stores/search";
 import frontArrow from "./../../assets/front.png";
@@ -29,7 +35,15 @@ function PokemonPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput, currentPage]);
 
-  const fetchAllPokemon = async () => {
+ /*  const addSearchHandler = useCallback((search: string) => {
+    //descontrui objeto do useSearchStore aqui
+    useSearchStore.setState({ search: search });
+  }, []);
+ */
+
+  //redundante aqui o useCallback() porque so renderiza 2x (quando da mount 
+  // e quando acaba o fetch)
+  const fetchAllPokemon =  async () => {
     //funçao do service
     const pokemonResults: IFetchedResults[] | undefined = await fetchPokemons(
       URL,
@@ -58,9 +72,10 @@ function PokemonPage() {
     setPokemonInfo(pokemonInfo);
   };
 
-
   //vou buscar 1 unico pokemon através do searchInput e guardo na info para renderizar
-  const fetchSinglePokemon = async () => {
+  //aqui como ele renderiza sempre que estou na pagina vale a pena o useCallback()
+  
+  const fetchSinglePokemon = useCallback((async () => {
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${searchInput}`
     );
@@ -76,7 +91,7 @@ function PokemonPage() {
         weight: data?.weight,
       } as IPokemonData,
     ]);
-  };
+  }), [searchInput]);
 
   const pageButtons = () => (
     <ContainerButton>
