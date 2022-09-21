@@ -97,4 +97,4 @@ export const DetailsBox = styled.div`
   }
 `;
 
-//testing
+//testing test
