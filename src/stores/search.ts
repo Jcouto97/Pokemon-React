@@ -1,8 +1,8 @@
 import create from "zustand";
 
-interface ISearch {
+export interface ISearch {
   search: string | null;
-  addSearch: (search: string) => void;
+  // addSearch: (search: string) => void;
 }
 
 //cria hook como objeto
@@ -10,7 +10,8 @@ interface ISearch {
 export const useSearchStore = create<ISearch>((set) => ({
   search: null,
 
+  /* 
   addSearch: (input: string | null) => {
     set(state => ({ search: state.search, input }));
-  },
+  }, */
 }));

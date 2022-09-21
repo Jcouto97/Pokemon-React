@@ -96,3 +96,6 @@ export const DetailsBox = styled.div`
     margin-left: 30px;
   }
 `;
+
+//test
+//testing test
