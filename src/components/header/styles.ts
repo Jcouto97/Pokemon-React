@@ -1,16 +1,19 @@
 import styled from "styled-components";
-import Theme from './../../theme'
 
 export const Container = styled.div`
-  /* background-color: #fddb2a; */
+  /* border-bottom: {({colors}) => colors.secondaryColor}; ???? */
   background-color: ${props => props.theme.colors.primaryColor};
   display: flex;
   justify-content: space-around;
-  gap: 800px;
+  gap: 20%;
   align-items: center;
-  /* border-bottom: 1px solid black; */
-  /* border-bottom: {({colors}) => colors.secondaryColor}; ???? */
   border-bottom: 2px solid red;
+
+  @media (max-width: 471px){
+    flex-wrap: wrap;
+    gap: 1%;
+    padding: 10px;
+    }
 `;
 
 export const Title = styled.h1`
@@ -20,6 +23,7 @@ export const Title = styled.h1`
   align-items: center;
   gap: 5px;
   font-size: 36px;
+  
 `;
 
 export const SearchBox = styled.p`
@@ -35,3 +39,4 @@ export const Dex = styled.p`
   padding: 2px;
   font-size: 30px;
 `;
+

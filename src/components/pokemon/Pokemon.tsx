@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Image, ID, Name } from "./styles";
-import TestPokemon from "./../../assets/testpokemon.png";
 import { IPokemonData } from "./../../types";
 
 function Pokemon({ pokemon } : { pokemon: IPokemonData }) {

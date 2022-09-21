@@ -14,11 +14,13 @@ const theme = {
     bordersColor: "#cfc3c3",
   },
   grid: {
-    gridDisplay: "1fr 1fr 1fr 1fr",
+    // gridDisplay: "1fr 1fr 1fr 1fr",
+    gridDisplay: "repeat(auto-fit, minmax(300px, 4fr))",
   },
 };
 
 //component
+//FC para nao precisar sempre de descontruir props
 const Theme: FC<IThemeProps> = ({ children }) => (
   <ThemeProvider theme={theme}>{children}</ThemeProvider>
 );
