@@ -27,7 +27,7 @@ function PokemonDetails() {
         .then((json) => setPokemonData(json));
     };
     fetchPokemon();
-  });
+  }, [id]);
 
   return (
     <>
