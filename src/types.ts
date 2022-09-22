@@ -1,3 +1,5 @@
+//interfaces usadas no projeto
+
 export interface IFetchedResults {
   name: string;
   url: string;

@@ -35,12 +35,6 @@ function PokemonPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput, currentPage]);
 
- /*  const addSearchHandler = useCallback((search: string) => {
-    //descontrui objeto do useSearchStore aqui
-    useSearchStore.setState({ search: search });
-  }, []);
- */
-
   //redundante aqui o useCallback() porque so renderiza 2x (quando da mount 
   // e quando acaba o fetch)
 
@@ -74,7 +68,7 @@ function PokemonPage() {
   };
 
   //vou buscar 1 unico pokemon através do searchInput e guardo na info para renderizar
-  //aqui como ele renderiza sempre que estou na pagina vale a pena o useCallback()
+  //aqui como ele renderiza sempre que estou na pagina vale a pena o useCallback()??
   //aqui tb n faz sentido, so fazia sentido se tivesse funcionalidade no details
 
   const fetchSinglePokemon = async () => {
@@ -126,5 +120,4 @@ function PokemonPage() {
   );
 }
 
-//teste
 export default PokemonPage;
