@@ -1,4 +1,4 @@
-//interfaces usadas no projeto
+//interfaces do projeto
 
 export interface IFetchedResults {
   name: string;
