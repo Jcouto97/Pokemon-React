@@ -110,4 +110,5 @@ export const ContainerButton = styled.div`
 
 export const Button = styled.button`
   border-color: aliceblue;
+  cursor: pointer;
 `;

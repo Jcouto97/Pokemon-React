@@ -2,11 +2,11 @@ import { IFetchedResults, IFetchedPokemon } from "../types";
 
 export const fetchPokemons = async (url: string, page: number) => {
   //OFFSET nr de pokes a dar skip por pagina usando o limit
-  const skip = page * 20;
+  const skip = page * 40;
 
   try {
     const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?offset=${skip}&limit=20`
+      `https://pokeapi.co/api/v2/pokemon?offset=${skip}&limit=40`
     );
     const parsed = await response.json();
     return parsed.results as IFetchedResults[];

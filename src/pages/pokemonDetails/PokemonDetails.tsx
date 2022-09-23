@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo, useCallback, useMemo } from "react";
+import React, { useEffect, useState, memo, useCallback } from "react";
 import { IFetchedPokemon } from "../../types";
 import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";

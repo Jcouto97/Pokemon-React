@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo, useCallback, useMemo } from "react";
+import React, { useEffect, useState, memo, useCallback } from "react";
 import Header from "../../components/header/Header";
 import Pokemon from "../../components/pokemon/Pokemon";
 import {
@@ -35,6 +35,7 @@ function PokemonPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput, currentPage]);
 
+  
   //redundante aqui o useCallback() porque so renderiza 2x (quando da mount 
   // e quando acaba o fetch)
 
