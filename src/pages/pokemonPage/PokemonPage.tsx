@@ -17,7 +17,7 @@ import {
   fetchPokemons,
   fetchPokemonData,
 } from "./../../services/pokemon-service";
-import { off } from "process";
+
 
 
 function PokemonPage() {
@@ -48,7 +48,7 @@ function PokemonPage() {
     //chegamos ao fim da pagina, qd chegamos ao fim da pagina damos load a + pokemons
     if (
       window.innerHeight + e.target.documentElement.scrollTop + 1 >=
-      e.target.documentElement.scrollHeight //&& offset<60
+      e.target.documentElement.scrollHeight //&& offset<60 //para parar depois de 60 pokemons
     ) {
       console.log("bottom");
       fetchAllPokemon();
@@ -60,6 +60,7 @@ function PokemonPage() {
 
   const fetchAllPokemon = useCallback(async () => {
     //funçao do service
+   
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=12`
     );
@@ -89,6 +90,7 @@ function PokemonPage() {
         }
       )
     );
+    //para manter os que tenho e adicionar os novos 12, neste caso
     setPokemonInfo((oldPokemon) => [...oldPokemon, ...pokemonInfo]);
     
   }, [currentPage]);
