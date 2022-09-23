@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo, useCallback } from "react";
 import { IFetchedPokemon } from "../../types";
 import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
@@ -20,14 +20,17 @@ function PokemonDetails() {
   const { id } = useParams();
   const [pokemonData, setPokemonData] = useState<IFetchedPokemon>();
 
-  useEffect(() => {
-    const fetchPokemon = async () => {
-      fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-        .then((response) => response.json())
-        .then((json) => setPokemonData(json));
-    };
-    fetchPokemon();
+  //ajuda em performance este usecallback? A função não é criada sempre que a pagina renderiza,
+  //mas para isso só seria benéfico se tivesse funcionalidade nesta pagina?
+  const fetchPokemon = useCallback(async () => {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      .then((response) => response.json())
+      .then((json) => setPokemonData(json));
   }, [id]);
+
+  useEffect(() => {
+    fetchPokemon();
+  }, [fetchPokemon]);
 
   return (
     <>
@@ -79,4 +82,4 @@ function PokemonDetails() {
   );
 }
 
-export default PokemonDetails;
+export default memo(PokemonDetails);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo, useCallback, useMemo } from "react";
 import Header from "../../components/header/Header";
 import Pokemon from "../../components/pokemon/Pokemon";
 import {
@@ -38,7 +38,7 @@ function PokemonPage() {
   //redundante aqui o useCallback() porque so renderiza 2x (quando da mount 
   // e quando acaba o fetch)
 
-  const fetchAllPokemon =  async () => {
+  const fetchAllPokemon =  useCallback((async () => {
     //funçao do service
     const pokemonResults: IFetchedResults[] | undefined = await fetchPokemons(
       URL,
@@ -65,13 +65,13 @@ function PokemonPage() {
       )
     );
     setPokemonInfo(pokemonInfo);
-  };
+  }), [currentPage]);
 
   //vou buscar 1 unico pokemon através do searchInput e guardo na info para renderizar
   //aqui como ele renderiza sempre que estou na pagina vale a pena o useCallback()??
   //aqui tb n faz sentido, so fazia sentido se tivesse funcionalidade no details
 
-  const fetchSinglePokemon = async () => {
+  const fetchSinglePokemon = useCallback((async () => {
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${searchInput}`
     );
@@ -87,7 +87,7 @@ function PokemonPage() {
         weight: data?.weight,
       } as IPokemonData,
     ]);
-  };
+  }), [searchInput]);
 
   const pageButtons = () => (
     <ContainerButton>
@@ -120,4 +120,4 @@ function PokemonPage() {
   );
 }
 
-export default PokemonPage;
+export default memo(PokemonPage);

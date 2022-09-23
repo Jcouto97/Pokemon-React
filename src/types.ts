@@ -3,7 +3,7 @@
 export interface IFetchedResults {
   name: string;
   url: string;
-}
+} 
 
 export interface IFetchedPokemon {
   id: number;
