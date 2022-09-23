@@ -17,10 +17,13 @@ import {
   fetchPokemons,
   fetchPokemonData,
 } from "./../../services/pokemon-service";
+import { off } from "process";
 
-const URL = "https://pokeapi.co/api/v2/pokemon";
 
 function PokemonPage() {
+  let offset = 0;
+  const URL = "https://pokeapi.co/api/v2/pokemon";
+
   const [pokemonInfo, setPokemonInfo] = useState<IPokemonData[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
 
@@ -30,21 +33,42 @@ function PokemonPage() {
   useEffect(() => {
     if (searchInput) fetchSinglePokemon();
     else fetchAllPokemon();
+    window.addEventListener("scroll", handleScroll);
 
     //????
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput, currentPage]);
 
-  
-  //redundante aqui o useCallback() porque so renderiza 2x (quando da mount 
+  const handleScroll = (e: any) => {
+    console.log("top", e.target.documentElement.scrollTop);
+    console.log("win", window.innerHeight);
+    console.log("height", e.target.documentElement.scrollHeight);
+
+    //quando a distancia do topo + a height da pagina displayed é igual ou maior (+1 pq pode haver erros ligeiros) do que a height total
+    //chegamos ao fim da pagina, qd chegamos ao fim da pagina damos load a + pokemons
+    if (
+      window.innerHeight + e.target.documentElement.scrollTop + 1 >=
+      e.target.documentElement.scrollHeight //&& offset<60
+    ) {
+      console.log("bottom");
+      fetchAllPokemon();
+    }
+  };
+
+  //redundante aqui o useCallback() porque so renderiza 2x (quando da mount
   // e quando acaba o fetch)
 
-  const fetchAllPokemon =  useCallback((async () => {
+  const fetchAllPokemon = useCallback(async () => {
     //funçao do service
-    const pokemonResults: IFetchedResults[] | undefined = await fetchPokemons(
-      URL,
-      currentPage
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=12`
     );
+    const parsed = await response.json();
+    const pokemonResults = parsed.results; 
+
+    offset += 12;
+    
+    
 
     //Promise all porque vamos iterar sobre 1 array de promises e quero que todas se resolvam antes de retornar
     const pokemonInfo = await Promise.all(
@@ -65,14 +89,15 @@ function PokemonPage() {
         }
       )
     );
-    setPokemonInfo(pokemonInfo);
-  }), [currentPage]);
+    setPokemonInfo((oldPokemon) => [...oldPokemon, ...pokemonInfo]);
+    
+  }, [currentPage]);
 
   //vou buscar 1 unico pokemon através do searchInput e guardo na info para renderizar
   //aqui como ele renderiza sempre que estou na pagina vale a pena o useCallback()??
   //aqui tb n faz sentido, so fazia sentido se tivesse funcionalidade no details
 
-  const fetchSinglePokemon = useCallback((async () => {
+  const fetchSinglePokemon = useCallback(async () => {
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${searchInput}`
     );
@@ -88,7 +113,7 @@ function PokemonPage() {
         weight: data?.weight,
       } as IPokemonData,
     ]);
-  }), [searchInput]);
+  }, [searchInput]);
 
   const pageButtons = () => (
     <ContainerButton>
