@@ -97,3 +97,17 @@ export const DetailsBox = styled.div`
   }
 `;
 
+export const ContainerButton = styled.div`
+  border: 1px solid red;
+  border-radius: 10px;
+  padding: 5px;
+  width: 6%;
+  display: flex;
+  justify-content: center;
+  background-color: aliceblue;
+  gap: 5px;
+`;
+
+export const Button = styled.button`
+  border-color: aliceblue;
+`;

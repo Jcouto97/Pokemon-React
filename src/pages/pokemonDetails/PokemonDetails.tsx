@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo, useCallback } from "react";
+import React, { useEffect, useState, memo, useCallback, useMemo } from "react";
 import { IFetchedPokemon } from "../../types";
 import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
@@ -14,11 +14,24 @@ import {
   Title,
   Ability,
   DetailsBox,
+  ContainerButton,
+  Button,
 } from "./styles";
 
 function PokemonDetails() {
   const { id } = useParams();
   const [pokemonData, setPokemonData] = useState<IFetchedPokemon>();
+  const [counter, setCounter] = useState<number>(1);
+
+  const handleCounterIncrement = () => {
+    if (counter < 10) setCounter(counter + 1);
+  };
+
+  // const memoizedVal = useMemo(() => handleCounterIncrement(), []); ????
+
+  const handleCounterDecrement = () => {
+    if (counter > 1) setCounter(counter - 1);
+  };
 
   //ajuda em performance este usecallback? A função não é criada sempre que a pagina renderiza,
   //mas para isso só seria benéfico se tivesse funcionalidade nesta pagina?
@@ -76,6 +89,11 @@ function PokemonDetails() {
             temporibus nesciunt eveniet et ut distinctio, cum cupiditate saepe
             esse reprehenderit ipsa aliquam, suscipit perferendis eligendi?
           </Text>
+          <ContainerButton>
+            <Button onClick={handleCounterDecrement}>-</Button>
+            {counter}
+            <Button onClick={handleCounterIncrement}>+</Button>
+          </ContainerButton>
         </DetailsBox>
       </SurroundingContainer>
     </>
