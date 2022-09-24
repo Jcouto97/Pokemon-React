@@ -4,14 +4,14 @@ import Pokemon from "../../components/pokemon/Pokemon";
 import {
   Container,
   Grid,
-  ContainerButton,
+/*   ContainerButton,
   Button,
-  PageButtons,
+  PageButtons, */
 } from "./styles";
 import { IFetchedResults, IFetchedPokemon, IPokemonData } from "./../../types";
 import { useSearchStore } from "./../../stores/search";
-import frontArrow from "./../../assets/front.png";
-import backArrow from "./../../assets/back.png";
+/* import frontArrow from "./../../assets/front.png";
+import backArrow from "./../../assets/back.png"; */
 import { Link } from "react-router-dom";
 import {
   fetchPokemons,
@@ -19,13 +19,12 @@ import {
 } from "./../../services/pokemon-service";
 
 
-
 function PokemonPage() {
   let offset = 0;
   const URL = "https://pokeapi.co/api/v2/pokemon";
 
   const [pokemonInfo, setPokemonInfo] = useState<IPokemonData[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  // const [currentPage, setCurrentPage] = useState<number>(0);
 
   //aqui o state hook do zustand
   const searchInput = useSearchStore((state) => state.search);
@@ -37,7 +36,7 @@ function PokemonPage() {
 
     //????
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchInput, currentPage]);
+  }, [searchInput]);
 
   const handleScroll = (e: any) => {
     console.log("top", e.target.documentElement.scrollTop);
@@ -60,17 +59,11 @@ function PokemonPage() {
 
   const fetchAllPokemon = useCallback(async () => {
     //funçao do service
-   
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=12`
-    );
-    const parsed = await response.json();
-    const pokemonResults = parsed.results; 
-
+    const pokemonResults = await fetchPokemons(URL, offset)
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     offset += 12;
     
-    
-
     //Promise all porque vamos iterar sobre 1 array de promises e quero que todas se resolvam antes de retornar
     const pokemonInfo = await Promise.all(
       (pokemonResults as IFetchedResults[]).map(
@@ -93,7 +86,7 @@ function PokemonPage() {
     //para manter os que tenho e adicionar os novos 12, neste caso
     setPokemonInfo((oldPokemon) => [...oldPokemon, ...pokemonInfo]);
     
-  }, [currentPage]);
+  }, []);
 
   //vou buscar 1 unico pokemon através do searchInput e guardo na info para renderizar
   //aqui como ele renderiza sempre que estou na pagina vale a pena o useCallback()??
@@ -117,17 +110,17 @@ function PokemonPage() {
     ]);
   }, [searchInput]);
 
-  const pageButtons = () => (
-    <ContainerButton>
-      <Button onClick={() => setCurrentPage((prev) => prev + 1)}>
-        {/*automaticamente vai buscar o ultimo state*/}
-        <PageButtons src={backArrow} alt="Previous" />
-      </Button>
-      <Button onClick={() => setCurrentPage((prev) => prev - 1)}>
-        <PageButtons src={frontArrow} alt="Next" />
-      </Button>
-    </ContainerButton>
-  );
+  // const pageButtons = () => (
+  //   <ContainerButton>
+  //     <Button onClick={() => setCurrentPage((prev) => prev + 1)}>
+  //       {/*automaticamente vai buscar o ultimo state*/}
+  //       <PageButtons src={backArrow} alt="Previous" />
+  //     </Button>
+  //     <Button onClick={() => setCurrentPage((prev) => prev - 1)}>
+  //       <PageButtons src={frontArrow} alt="Next" />
+  //     </Button>
+  //   </ContainerButton>
+  // );
 
   return (
     <>
@@ -142,7 +135,7 @@ function PokemonPage() {
             );
           })}
         </Grid>
-        {pageButtons()}
+        {/* {pageButtons()} */}
       </Container>
     </>
   );

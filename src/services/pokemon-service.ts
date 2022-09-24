@@ -1,8 +1,6 @@
 import { IFetchedResults, IFetchedPokemon } from "../types";
 
-export const fetchPokemons = async (url: string, page: number) => {
-  //OFFSET nr de pokes a dar skip por pagina usando o limit
-  const offset = page * 12;
+export const fetchPokemons = async (url: string, offset:number) => {
 
   try {
     const response = await fetch(
