@@ -32,6 +32,8 @@ function PokemonPage() {
   useEffect(() => {
     if (searchInput) fetchSinglePokemon();
     else fetchAllPokemon();
+
+    //para monitorizar scroll constantemente
     window.addEventListener("scroll", handleScroll);
 
     //????
@@ -64,7 +66,6 @@ function PokemonPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     offset += 12;
     
-    //Promise all porque vamos iterar sobre 1 array de promises e quero que todas se resolvam antes de retornar
     const pokemonInfo = await Promise.all(
       (pokemonResults as IFetchedResults[]).map(
         async (pokemon: IFetchedResults) => {
