@@ -4,14 +4,9 @@ import Pokemon from "../../components/pokemon/Pokemon";
 import {
   Container,
   Grid,
-/*   ContainerButton,
-  Button,
-  PageButtons, */
 } from "./styles";
 import { IFetchedResults, IFetchedPokemon, IPokemonData } from "./../../types";
 import { useSearchStore } from "./../../stores/search";
-/* import frontArrow from "./../../assets/front.png";
-import backArrow from "./../../assets/back.png"; */
 import { Link } from "react-router-dom";
 import {
   fetchPokemons,
@@ -20,11 +15,11 @@ import {
 
 
 function PokemonPage() {
-  let offset = 0;
+  //tentei fazer aqui hook com offset sem sucesso
+  let offset = 0; 
   const URL = "https://pokeapi.co/api/v2/pokemon";
 
   const [pokemonInfo, setPokemonInfo] = useState<IPokemonData[]>([]);
-  // const [currentPage, setCurrentPage] = useState<number>(0);
 
   //aqui o state hook do zustand
   const searchInput = useSearchStore((state) => state.search);
@@ -89,9 +84,8 @@ function PokemonPage() {
     
   }, []);
 
-  //vou buscar 1 unico pokemon através do searchInput e guardo na info para renderizar
   //aqui como ele renderiza sempre que estou na pagina vale a pena o useCallback()??
-  //aqui tb n faz sentido, so fazia sentido se tivesse funcionalidade no details
+  //tb n faz sentido, so se tivesse funcionalidade no details
 
   const fetchSinglePokemon = useCallback(async () => {
     const response = await fetch(
@@ -111,18 +105,6 @@ function PokemonPage() {
     ]);
   }, [searchInput]);
 
-  // const pageButtons = () => (
-  //   <ContainerButton>
-  //     <Button onClick={() => setCurrentPage((prev) => prev + 1)}>
-  //       {/*automaticamente vai buscar o ultimo state*/}
-  //       <PageButtons src={backArrow} alt="Previous" />
-  //     </Button>
-  //     <Button onClick={() => setCurrentPage((prev) => prev - 1)}>
-  //       <PageButtons src={frontArrow} alt="Next" />
-  //     </Button>
-  //   </ContainerButton>
-  // );
-
   return (
     <>
       <Header />
@@ -136,7 +118,6 @@ function PokemonPage() {
             );
           })}
         </Grid>
-        {/* {pageButtons()} */}
       </Container>
     </>
   );
