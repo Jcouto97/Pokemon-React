@@ -9,7 +9,7 @@ App made with the purpose of training my React skills aswell as simple design an
 ```
 $ git clone https://github.com/Jcouto97/Pokemon-React.git
 $ npm install
-$ cd poke
+$ cd Pokemon-React
 $ npm start
 ```
 
