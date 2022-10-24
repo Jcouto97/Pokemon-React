@@ -26,3 +26,4 @@ const Theme: FC<IThemeProps> = ({ children }) => (
 );
 
 export default Theme;
+
